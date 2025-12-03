@@ -165,13 +165,6 @@ const NetflixPortfolio = () => {
     }
   ];
 
-  useEffect(()=>{
-    const savedProfile = localStorage.getItem("currentProfile");
-    if(savedProfile){
-      setCurrentProfile(savedProfile);
-    }
-  },[]);
-
   useEffect(() => {
     const handleScroll = () => setScrollPosition(window.scrollY);
     window.addEventListener('scroll', handleScroll);
@@ -297,7 +290,7 @@ const NetflixPortfolio = () => {
     <div
       onMouseEnter={() => setHoveredProject(project.id)}
       onMouseLeave={() => setHoveredProject(null)}
-      onClick={() => router.push(`/home/project/${project.id}`)}
+      onClick={() => router.push(`/project/${project.id}`)}
       className="relative cursor-pointer transform transition-all duration-300 hover:scale-105 hover:z-10 animate-slide-up"
       style={{ animationDelay: `${delay}ms` }}
     >
