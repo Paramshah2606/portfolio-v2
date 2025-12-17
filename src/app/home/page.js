@@ -162,7 +162,7 @@ const NetflixPortfolio = () => {
             </button>
 
             <button
-              onClick={() => setCurrentPage("contact")}
+              onClick={() => router.push(`/home/contact`)}
               className=" bg-gray-600/80 backdrop-blur-sm text-white px-6 py-3 md:px-10 md:py-4 rounded flex items-center gap-3 font-semibold hover:bg-gray-500 transition-colors"
             >
               <Info className="w-5 h-5" /> Contact Me
