@@ -38,7 +38,7 @@ const NetflixPortfolio = () => {
     const [hovered, setHovered] = useState(null);
     const [index, setIndex] = useState(0);
 
-    const images = project.gallery || [project.thumbnail]; // fallback
+    const images = project.gallery || [project.thumbnail];
 
     // auto-slider
     useEffect(() => {
@@ -66,6 +66,7 @@ const NetflixPortfolio = () => {
         <img
           key={i}
           src={img}
+          alt={project.title}
           className={`absolute w-full h-full object-cover transition-all duration-500 ${
             i === index ? "opacity-100" : "opacity-0"
           }`}
@@ -84,30 +85,40 @@ const NetflixPortfolio = () => {
           />
         ))}
       </div>
-    </div>
 
-    {/* HOVER OVERLAY */}
-    <div
-      className={`
-        absolute inset-0 rounded-lg p-3 sm:p-4 flex flex-col justify-between transition-all duration-300 ${hovered === project.id ? "backdrop-blur-md bg-black/40" : "opacity-0"}
-      `}
-    >
-      <div>
-        <h3 className="text-white font-bold text-base sm:text-lg mb-1">
-          {project.title}
-        </h3>
-        <p className="text-gray-200 text-xs sm:text-sm mb-3">
-          {project.shortDesc}
-        </p>
-      </div>
-
-      <button
+      {/* DESKTOP HOVER OVERLAY - hidden on mobile */}
+      <div
         className={`
-          px-3 py-1.5 sm:px-4 sm:py-2 rounded bg-white text-black text-xs sm:text-sm flex items-center gap-2 transition-all duration-300 mt-2 w-fit ${hovered === project.id ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}
+          hidden md:flex absolute inset-0 rounded-lg p-3 sm:p-4 flex-col justify-between transition-all duration-300 ${hovered === project.id ? "backdrop-blur-md bg-black/40" : "opacity-0"}
         `}
       >
-        <Play className="w-3 h-3 sm:w-4 sm:h-4" /> View Project
-      </button>
+        <div>
+          <h3 className="text-white font-bold text-base sm:text-lg mb-1">
+            {project.title}
+          </h3>
+          <p className="text-gray-200 text-xs sm:text-sm mb-3">
+            {project.shortDesc}
+          </p>
+        </div>
+
+        <button
+          className={`
+            px-3 py-1.5 sm:px-4 sm:py-2 rounded bg-white text-black text-xs sm:text-sm flex items-center gap-2 transition-all duration-300 mt-2 w-fit ${hovered === project.id ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}
+          `}
+        >
+          <Play className="w-3 h-3 sm:w-4 sm:h-4" /> View Project
+        </button>
+      </div>
+    </div>
+
+    {/* MOBILE: TITLE BELOW IMAGE - shown only on mobile/tablet */}
+    <div className="md:hidden mt-3">
+      <h3 className="text-gray-900 dark:text-white font-bold text-sm sm:text-base mb-1">
+        {project.title}
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm line-clamp-2">
+        {project.shortDesc}
+      </p>
     </div>
   </div>
 );
